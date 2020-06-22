@@ -9,8 +9,20 @@ spec:
   rules:
   - http:
       paths:
-      - path: /registry(/|$)(.*)
+      - path: /site(/|$)(.*)
         pathType: Prefix
         backend:
-          serviceName: registry-service
-          servicePort: 48000
+          serviceName: service-site
+          servicePort: 48100
+
+      - path: /aut(/|$)(.*)
+        pathType: Prefix
+        backend:
+          serviceName: service-identity
+          servicePort: 48100
+
+      - path: /api(/|$)(.*)
+        pathType: Prefix
+        backend:
+          serviceName: service-api
+          servicePort: 48100
