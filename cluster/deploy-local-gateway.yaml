@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: owlvey-ingress
+  namespace: owlvey
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /site(/|$)(.*)
+        pathType: Prefix
+        backend:
+          serviceName: service-site
+          servicePort: 48100
+
+      - path: /aut(/|$)(.*)
+        pathType: Prefix
+        backend:
+          serviceName: service-identity
+          servicePort: 48100
+
+      - path: /api(/|$)(.*)
+        pathType: Prefix
+        backend:
+          serviceName: service-api
+          servicePort: 48100
