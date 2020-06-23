@@ -33,4 +33,22 @@ spec:
           serviceName: service-api
           servicePort: 48100
 
+---
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: owlvey-ingress-identity
+  namespace: owlvey
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:  
+  - host: identity.owlvey.com
+    http:
+      paths:
+      - path: /.*        
+        backend:
+          serviceName: service-identity
+          servicePort: 48100
    
